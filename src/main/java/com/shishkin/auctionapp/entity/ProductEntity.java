@@ -3,6 +3,7 @@ package com.shishkin.auctionapp.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +12,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.math.BigDecimal;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Size;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "product")
@@ -24,9 +31,22 @@ public class ProductEntity {
     private Long id;
     private String title;
     private String image;
-    private BigDecimal price;
+    private String description;
+    private Long price;
+
+//    @DateTimeFormat(pattern = "MM/dd/yyyy")
+//    @NotNull
+//    @Past
+//    private LocalDate birthday;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
     private CategoryEntity category;
+
+    public String getImagePath() {
+        if (image == null || id == null) return null;
+        return "/images/uploads/products/" + id + "/" + image;
+    }
+//    @OneToMany(cascade = CascadeType.ALL)
+//    private List<LotEntity> lots;
 }

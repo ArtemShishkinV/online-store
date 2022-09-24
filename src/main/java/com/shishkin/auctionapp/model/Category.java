@@ -1,9 +1,19 @@
 package com.shishkin.auctionapp.model;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Value
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Category {
-    Long id;
-    String title;
+    private Long id;
+
+    @NotBlank(message = "Title should not be empty")
+    @Size(min = 5, max = 32, message = "Title should be between 5 and 32 characters")
+    private String title;
 }

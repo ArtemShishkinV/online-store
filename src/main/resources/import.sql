@@ -1,0 +1,3 @@
+INSERT INTO CATEGORY(title) VALUES('монеты');
+INSERT INTO CATEGORY(title) VALUES('книги');
+INSERT INTO CATEGORY(title) VALUES('автомобили');
