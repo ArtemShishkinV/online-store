@@ -3,57 +3,63 @@
       xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <link th:href="@{/style.css}" rel="stylesheet"/>
     <title>Создание продукта</title>
     <link rel="shortcut icon" type="image/png" th:href="@{/images/icon.png}">
+    <link th:href="@{/style.css}" rel="stylesheet"/>
 </head>
 <body>
-
+<div th:replace="header :: copy-header"></div>
 <!--/*@thymesVar id="product" type="com.shishkin.auctionapp.model.Product"*/-->
 <!--/*@thymesVar id="categories" type="java.util.List<com.shishkin.auctionapp.model.Category>"*/-->
-<form th:method="POST" class="create-product-form" th:action="@{/products}" th:object="${product}"
-      enctype="multipart/form-data">
-    <div>
-        <label for="title">Название продукта: </label>
-        <input type="text" th:field="*{title}" id="title"/>
-        <div style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title error</div>
-        <br/>
-    </div>
+<main>
+    <div class="container">
+        <form th:method="POST" class="create-product-form" th:action="@{/products}" th:object="${product}"
+              enctype="multipart/form-data">
+            <div>
+                <label for="title">Название продукта: </label>
+                <input type="text" th:field="*{title}" id="title"/>
+                <div style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title error</div>
+                <br/>
+            </div>
 
-    <div>
-        <label for="description">Заполните описание: </label>
-        <input type="text" th:field="*{description}" id="description"/>
-        <div style="color:red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">description error
-        </div>
-        <br/>
-    </div>
+            <div>
+                <label for="description">Заполните описание: </label>
+                <input type="text" th:field="*{description}" id="description"/>
+                <div style="color:red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">
+                    description
+                    error
+                </div>
+                <br/>
+            </div>
 
-    <div>
-        <label for="price">Введите цену: </label>
-        <input type="number" th:field="*{price}" id="price"/>
-        <div style="color:red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">price error</div>
-        <br/>
-    </div>
+            <div>
+                <label for="price">Введите цену: </label>
+                <input type="number" th:field="*{price}" id="price"/>
+                <div style="color:red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">price error</div>
+                <br/>
+            </div>
 
-    <div>
-        <input type="file" id="image" th:field="*{image}"
-               required="required" placeholder="Загрузить изображение" accept="image/png, image/jpeg"/>
-        <div style="color:red" th:if="${#fields.hasErrors('image')}" th:errors="*{image}">price error</div>
-        <br/>
-    </div>
+            <div>
+                <input type="file" id="image" th:field="*{image}"
+                       required="required" placeholder="Загрузить изображение" accept="image/png, image/jpeg"/>
+                <div style="color:red" th:if="${#fields.hasErrors('image')}" th:errors="*{image}">price error</div>
+                <br/>
+            </div>
 
-    <div>
-        <select th:field="*{categoryTitle}" th:onchange="disableDefaultCategory()" required="required">
-            <option value="" id="default-category" th:selected="selected">Выберите категорию</option>
-            <option th:each="category: ${categories}"
-                    th:value="${category.title}"
-                    th:text="${category.title}">
-        </select>
-        <br/>
-    </div>
+            <div>
+                <select th:field="*{categoryTitle}" th:onchange="disableDefaultCategory()" required="required">
+                    <option value="" id="default-category" th:selected="selected">Выберите категорию</option>
+                    <option th:each="category: ${categories}"
+                            th:value="${category.title}"
+                            th:text="${category.title}">
+                </select>
+                <br/>
+            </div>
 
-    <input type="submit" value="Создать!"/>
-</form>
+            <input type="submit" value="Создать!"/>
+        </form>
+    </div>
+</main>
 <script type="text/javascript" th:src="@{/script.js}"></script>
 </body>
 </html>

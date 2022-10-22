@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 public class Category {
     private Long id;
 
-    @NotBlank(message = "Title should not be empty")
-    @Size(min = 5, max = 32, message = "Title should be between 5 and 32 characters")
+    @NotBlank(message = "Название категории не может быть пустым")
+    @Size(min = 5, max = 32, message = "Название категории должно быть длиной от 5 до 32 символов!")
     private String title;
 }

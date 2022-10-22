@@ -3,7 +3,7 @@ package com.shishkin.auctionapp.service;
 import com.shishkin.auctionapp.exception.CategoryNotFoundException;
 import com.shishkin.auctionapp.mapper.CategoryToEntityMapper;
 import com.shishkin.auctionapp.model.Category;
-import com.shishkin.auctionapp.repository.jpa.CategoryRepository;
+import com.shishkin.auctionapp.repository.CategoryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

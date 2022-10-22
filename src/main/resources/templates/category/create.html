@@ -3,15 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Создание категории</title>
+    <link th:href="@{/style.css}" rel="stylesheet"/>
 </head>
 <body>
+<div th:replace="header :: copy-header"></div>
 <!--/*@thymesVar id="category" type="com.shishkin.auctionapp.model.Category"*/-->
-<form th:method="POST" th:action="@{/categories}" th:object="${category}">
-    <label for="title">Название категории: </label>
-    <input type="text" th:field="*{title}" id="title"/>
-    <div style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title error</div>
-    <br/>
-    <input type="submit" value="Создать!"/>
-</form>
+<main>
+    <div class="container">
+        <form th:method="POST" th:action="@{/categories}" th:object="${category}">
+            <label for="title">Название категории: </label>
+            <input type="text" th:field="*{title}" id="title"/>
+            <div style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title error</div>
+            <br/>
+            <input type="submit" value="Создать!"/>
+        </form>
+    </div>
+</main>
 </body>
 </html>

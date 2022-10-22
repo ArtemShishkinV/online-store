@@ -4,6 +4,10 @@
     margin: 0;
 }
 
+a {
+    text-decoration: none;
+}
+
 /* Chrome, Safari, Edge, Opera */
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button {
@@ -11,27 +15,67 @@ input[type=number]::-webkit-inner-spin-button {
     margin: 0;
 }
 
+.container {
+    max-width: 1170px;
+    width: 96%;
+    margin: 0 auto;
+}
+
 /* Firefox */
 input[type=number] {
     -moz-appearance: textfield;
 }
 
-/*.create-product-form {*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    width: 42%;*/
-/*    align-items: flex-start;*/
-/*    margin: 0 auto;*/
-/*}*/
-
 .create-product-form div {
     margin: 10px;
 }
 
-/*.create-product-form div label {*/
-/*    margin-right: 40px;*/
-/*}*/
 
-/*.create-product-form div input {*/
-/*    margin-left: 40px;*/
-/*}*/
+/* Header */
+
+header{
+    background-color: #4775d1;
+    padding: 15px 5px;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+    max-width: 240px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+header nav img {
+    width: 40px;
+    height: 40px;
+}
+
+header ul {
+    list-style: none;
+    display: flex;
+    justify-content: start;
+}
+
+header ul li {
+    margin-left: 20px;
+}
+
+header a {
+    text-shadow: 1px 1px #000000;
+    color: white;
+}
+
+header a:hover {
+    color: black;
+    text-shadow: none;
+    transition-duration: 1ms;
+}
+
+.header-inner{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* End header */

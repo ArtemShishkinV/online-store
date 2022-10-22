@@ -34,11 +34,6 @@ public class ProductEntity {
     private String description;
     private Long price;
 
-//    @DateTimeFormat(pattern = "MM/dd/yyyy")
-//    @NotNull
-//    @Past
-//    private LocalDate birthday;
-
     @ManyToOne
     @JoinColumn(name = "category_id")
     private CategoryEntity category;
@@ -47,6 +42,4 @@ public class ProductEntity {
         if (image == null || id == null) return null;
         return "/images/uploads/products/" + id + "/" + image;
     }
-//    @OneToMany(cascade = CascadeType.ALL)
-//    private List<LotEntity> lots;
 }

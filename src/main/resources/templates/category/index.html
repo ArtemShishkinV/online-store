@@ -4,14 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Список категорий</title>
+    <link th:href="@{/style.css}" rel="stylesheet"/>
 </head>
 <body>
+<div th:replace="header :: copy-header"></div>
 <!--/*@thymesVar id="categories" type="java.util.List<com.shishkin.auctionapp.model.Category>"*/-->
-<div th:each="category: ${categories}">
-    <div th:text="${category.title}"> VALUE </div>
-</div>
-<br/>
-<hr/>
-<a href="/categories/create">Создать категорию!</a>
+<main>
+    <div class="container">
+        <div th:each="category: ${categories}">
+            <div th:text="${category.title}"> VALUE</div>
+        </div>
+        <br/>
+        <hr/>
+        <a href="/categories/create">Создать категорию!</a>
+    </div>
+</main>
 </body>
 </html>

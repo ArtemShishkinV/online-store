@@ -1,4 +1,4 @@
-package com.shishkin.auctionapp.repository.jpa;
+package com.shishkin.auctionapp.repository;
 
 import com.shishkin.auctionapp.entity.CategoryEntity;
 import org.springframework.data.repository.CrudRepository;

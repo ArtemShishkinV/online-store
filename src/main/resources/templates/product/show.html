@@ -5,26 +5,31 @@
     <meta charset="UTF-8">
     <title>Продукт</title>
     <link rel="shortcut icon" type="image/png" th:href="@{/images/icon.png}">
+    <link th:href="@{/style.css}" rel="stylesheet"/>
 </head>
 <body>
+<div th:replace="header :: copy-header"></div>
 <!--/*@thymesVar id="product" type="com.shishkin.auctionapp.model.Product"*/-->
-<div class="product">
-    <img th:src="@{${product.imagePath}}" alt="Изображение продукта" class="product-image"/>
-    <div class="product-info">
-        <div class="product-title" th:text="${product.title}">
-            title
-        </div>
-        <div class="product-category" th:text="${product.categoryTitle}">
-            category
-        </div>
-        <div class="product-description" th:text="${product.description}">
-            description
-        </div>
-        <div class="product-price" th:text="${product.price}">
-            price
+<main>
+    <div class="container">
+        <div class="product">
+            <img th:src="@{${product.imagePath}}" alt="Изображение продукта" class="product-image"/>
+            <div class="product-info">
+                <div class="product-title" th:text="${product.title}">
+                    title
+                </div>
+                <div class="product-category" th:text="${product.categoryTitle}">
+                    category
+                </div>
+                <div class="product-description" th:text="${product.description}">
+                    description
+                </div>
+                <div class="product-price" th:text="${product.price}">
+                    price
+                </div>
+            </div>
         </div>
     </div>
-
-</div>
+</main>
 </body>
 </html>

@@ -5,8 +5,16 @@
     <meta charset="UTF-8">
     <title>Auction</title>
     <link rel="shortcut icon" type="image/png" th:href="@{/images/icon.png}">
+    <link th:href="@{/style.css}" rel="stylesheet"/>
 </head>
 <body>
-    <div>Welcome to my auction!</div>
+<div th:replace="header :: copy-header"></div>
+<main>
+    <div class="container">
+        <div class="hello-main-inner">
+            Добро пожаловать на аукцион!
+        </div>
+    </div>
+</main>
 </body>
 </html>
