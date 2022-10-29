@@ -2,6 +2,7 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    font-family: Georgia, sans-serif;
 }
 
 a {
@@ -35,7 +36,9 @@ input[type=number] {
 
 header{
     background-color: #4775d1;
-    padding: 15px 5px;
+    min-height: 75px;
+    display: flex;
+    align-items: center;
 }
 
 header nav {
@@ -78,4 +81,25 @@ header a:hover {
     justify-content: space-between;
 }
 
+.register-header-inner, .login-header-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-shadow: 1px 1px #000000;
+    color: white;
+    font-size: 20px;
+    padding: 0;
+}
+
 /* End header */
+
+.hello-main-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.hello-header-authorization a {
+    margin-left: 20px;
+}

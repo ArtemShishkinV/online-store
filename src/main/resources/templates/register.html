@@ -10,7 +10,7 @@
 <body>
 <header>
     <div class="container">
-        <div style="text-align: center" class="header-inner">
+        <div class="register-header-inner">
             Регистрация
         </div>
     </div>
@@ -19,19 +19,19 @@
     <div class="container">
         <!--/*@thymesVar id="user" type="com.shishkin.auctionapp.model.User"*/-->
         <form th:method="POST" th:action="@{/register}" th:object="${user}">
-            <label for="username">Username: </label>
+            <label for="username">Имя пользователя: </label>
             <input type="text" th:field="*{username}" id="username"/><br/>
-            <label for="password">Password: </label>
+            <label for="password">Пароль: </label>
             <input type="password" th:field="*{password}" id="password"/><br/>
-            <label for="confirm">Confirm password: </label>
+            <label for="confirm">Подтверждение пароля: </label>
             <input type="password" id="confirm"/><br/>
-            <label for="fullname">Full name: </label>
+            <label for="fullname">Полное имя: </label>
             <input type="text" th:field="*{fullname}" id="fullname"/><br/>
-            <label for="email">Street: </label>
+            <label for="email">Город: </label>
             <input type="text" th:field="*{email}" id="email"/><br/>
-            <label for="phone">Phone: </label>
+            <label for="phone">Телефон: </label>
             <input type="text" th:field="*{phoneNumber}" id="phone"/><br/>
-            <input type="submit" value="Register"/>
+            <input type="submit" value="Зарегистрироваться"/>
         </form>
     </div>
 </main>

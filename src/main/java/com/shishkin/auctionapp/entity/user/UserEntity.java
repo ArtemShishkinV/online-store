@@ -32,10 +32,11 @@ public class UserEntity implements UserDetails {
     private String fullname;
     private String email;
     private String phoneNumber;
+    private String role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        return List.of(new SimpleGrantedAuthority(role));
     }
 
     @Override
