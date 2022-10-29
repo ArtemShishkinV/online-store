@@ -1,4 +1,4 @@
-package com.shishkin.auctionapp.mapper;
+package com.shishkin.auctionapp.mapper.entity;
 
 import com.shishkin.auctionapp.entity.CategoryEntity;
 import com.shishkin.auctionapp.model.Category;

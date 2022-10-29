@@ -3,7 +3,7 @@ package com.shishkin.auctionapp.service;
 import com.shishkin.auctionapp.entity.ProductEntity;
 import com.shishkin.auctionapp.exception.CategoryNotFoundException;
 import com.shishkin.auctionapp.exception.ProductNotFoundException;
-import com.shishkin.auctionapp.mapper.ProductToEntityMapper;
+import com.shishkin.auctionapp.mapper.entity.ProductToEntityMapper;
 import com.shishkin.auctionapp.model.Product;
 import com.shishkin.auctionapp.repository.CategoryRepository;
 import com.shishkin.auctionapp.repository.ProductRepository;

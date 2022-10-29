@@ -1,6 +1,6 @@
 package com.shishkin.auctionapp.service;
 
-import com.shishkin.auctionapp.mapper.UserToEntityMapper;
+import com.shishkin.auctionapp.mapper.entity.UserToEntityMapper;
 import com.shishkin.auctionapp.model.User;
 import com.shishkin.auctionapp.repository.UserRepository;
 import lombok.AllArgsConstructor;

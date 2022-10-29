@@ -1,7 +1,7 @@
 package com.shishkin.auctionapp.service;
 
 import com.shishkin.auctionapp.exception.CategoryNotFoundException;
-import com.shishkin.auctionapp.mapper.CategoryToEntityMapper;
+import com.shishkin.auctionapp.mapper.entity.CategoryToEntityMapper;
 import com.shishkin.auctionapp.model.Category;
 import com.shishkin.auctionapp.repository.CategoryRepository;
 import lombok.AllArgsConstructor;
