@@ -7,5 +7,5 @@ public interface EntityRepository<T, ID> {
 
     Optional<T> findById(ID id);
 
-    <S extends T> S save(S entity);
+    T save(T entity);
 }

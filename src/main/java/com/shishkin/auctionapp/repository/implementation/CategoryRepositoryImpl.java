@@ -13,27 +13,30 @@ import java.util.Optional;
 @AllArgsConstructor
 public class CategoryRepositoryImpl implements CategoryRepository {
     private static final String FIND_ALL = "SELECT * FROM category";
+    private static final String FIND_BY_TITLE = "SELECT * FROM category WHERE category.title = ?";
+    private static final String FIND_BY_ID = "SELECT * FROM category WHERE category.id = ?";
 
     private JdbcTemplate jdbcTemplate;
+    private CategoryRowMapper mapper;
 
     @Override
-    public <S extends CategoryEntity> S save(S entity) {
+    public CategoryEntity save(CategoryEntity entity) {
         return null;
     }
 
     @Override
     public Optional<CategoryEntity> findByTitle(String title) {
-        return Optional.empty();
+        return Optional.ofNullable(jdbcTemplate.queryForObject(FIND_BY_TITLE, mapper, title));
     }
 
     @Override
     public Iterable<CategoryEntity> findAll() {
-        return jdbcTemplate.query(FIND_ALL, new CategoryRowMapper());
+        return jdbcTemplate.query(FIND_ALL, mapper);
     }
 
     @Override
-    public Optional<CategoryEntity> findById(Long aLong) {
-        return Optional.empty();
+    public Optional<CategoryEntity> findById(Long id) {
+        return Optional.ofNullable(jdbcTemplate.queryForObject(FIND_BY_ID, mapper, id));
     }
 
 

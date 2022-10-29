@@ -37,9 +37,9 @@ public class DefaultProductService implements ProductService {
     @Override
     public ProductEntity add(Product product) {
         ProductEntity productEntity = this.productMapper.productToProductEntity(product);
-        productEntity.setCategory(categoryRepository.findByTitle(product.getCategoryTitle())
+        productEntity.setCategoryId(categoryRepository.findByTitle(product.getCategoryTitle())
                 .orElseThrow(() -> new CategoryNotFoundException(HttpStatus.NOT_FOUND,
-                        "Category not found: title = " + product.getCategoryTitle())));
+                        "Category not found: title = " + product.getCategoryTitle())).getId());
 
         return productRepository.save(productEntity);
     }

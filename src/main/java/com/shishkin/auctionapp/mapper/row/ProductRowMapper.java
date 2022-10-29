@@ -8,10 +8,12 @@ import com.shishkin.auctionapp.service.CategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@Component
 public class ProductRowMapper implements RowMapper<ProductEntity> {
     @Override
     public ProductEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -21,7 +23,7 @@ public class ProductRowMapper implements RowMapper<ProductEntity> {
         product.setDescription(rs.getString("description"));
         product.setPrice(rs.getLong("price"));
         product.setImage(rs.getString("image"));
-        product.setCategory(rs.getLong("category_id"));
+        product.setCategoryId(rs.getLong("category_id"));
         return product;
     }
 

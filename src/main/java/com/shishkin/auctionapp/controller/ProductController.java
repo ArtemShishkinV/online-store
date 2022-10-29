@@ -38,7 +38,6 @@ public class ProductController {
     public String showById(@PathVariable(required = false) Long id, Model model) {
         Product product = productService.findById(id);
         model.addAttribute("product", product);
-//        model.addAttribute("image", fileUploadService.getFile());
         return "product/show";
     }
 

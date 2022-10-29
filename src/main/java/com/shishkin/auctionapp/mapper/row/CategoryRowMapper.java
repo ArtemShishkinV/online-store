@@ -2,10 +2,12 @@ package com.shishkin.auctionapp.mapper.row;
 
 import com.shishkin.auctionapp.entity.CategoryEntity;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@Component
 public class CategoryRowMapper implements RowMapper<CategoryEntity> {
     @Override
     public CategoryEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
