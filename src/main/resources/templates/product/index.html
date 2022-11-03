@@ -12,13 +12,37 @@
 <!--/*@thymesVar id="products" type="java.util.List<com.shishkin.auctionapp.model.Product>"*/-->
 <main>
     <div class="container">
-        <div th:each="product: ${products}">
-            <a th:href="@{/products/{id}(id=${product.getId()})}"
-               th:text="${product.title}">value</a>
+        <div class="products-inner">
+            <div class="products">
+                <div th:each="product: ${products}" class="products-product">
+                    <a th:href="@{/products/{id}(id=${product.getId()})}" class="products-product-image-block">
+                        <img th:src="@{${product.imagePath}}"
+                             alt="Изображение продукта"
+                             class="products-product-image"/>
+                    </a>
+                    <a th:href="@{/products/{id}(id=${product.getId()})}"
+                       th:text="${product.title}">value</a>
+                    <div class="products-product-price" th:text="${product.price}">
+                        price
+                    </div>
+                </div>
+                <div th:each="product: ${products}" class="products-product">
+                    <a th:href="@{/products/{id}(id=${product.getId()})}" class="products-product-image-block">
+                        <img th:src="@{${product.imagePath}}"
+                             alt="Изображение продукта"
+                             class="products-product-image"/>
+                    </a>
+                    <a th:href="@{/products/{id}(id=${product.getId()})}"
+                       th:text="${product.title}">value</a>
+                    <div class="products-product-price" th:text="${product.price}">
+                        price
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <hr/>
+            <a href="/products/create">Создать продукт!</a>
         </div>
-        <br/>
-        <hr/>
-        <a href="/products/create">Создать продукт!</a>
     </div>
 </main>
 </body>
