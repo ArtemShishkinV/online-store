@@ -1,12 +1,6 @@
 package com.shishkin.auctionapp.mapper.row;
 
-import com.shishkin.auctionapp.entity.CategoryEntity;
 import com.shishkin.auctionapp.entity.ProductEntity;
-import com.shishkin.auctionapp.exception.CategoryNotFoundException;
-import com.shishkin.auctionapp.repository.CategoryRepository;
-import com.shishkin.auctionapp.service.CategoryService;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 

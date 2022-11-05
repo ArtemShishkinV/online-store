@@ -5,7 +5,6 @@ import com.shishkin.auctionapp.mapper.row.ProductRowMapper;
 import com.shishkin.auctionapp.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -16,7 +15,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     private static final String FIND_ALL = "SELECT * FROM product";
     private static final String FIND_BY_ID = "SELECT * FROM product WHERE product.id = (?)";
     private static final String INSERT = "INSERT INTO product(description, image, price, title, category_id) " +
-            "VALUES (?, ?, ?, ?, ?)";
+            "VALUES (?, ?, ?, ?, ?) RETURNING ID";
 
     private JdbcTemplate jdbcTemplate;
     private ProductRowMapper mapper;
@@ -33,12 +32,12 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public ProductEntity save(ProductEntity entity) {
-
-        return jdbcTemplate.queryForObject(INSERT, mapper,
+        entity.setId(jdbcTemplate.queryForObject(INSERT, Long.class,
                 entity.getDescription(),
                 entity.getImage(),
                 entity.getPrice(),
                 entity.getTitle(),
-                entity.getCategoryId());
+                entity.getCategoryId()));
+        return entity;
     }
 }
