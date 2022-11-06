@@ -15,14 +15,15 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     private static final String FIND_ALL = "SELECT * FROM category";
     private static final String FIND_BY_TITLE = "SELECT * FROM category WHERE category.title = ?";
     private static final String FIND_BY_ID = "SELECT * FROM category WHERE category.id = ?";
-    private static final String INSERT = "INSERT INTO category(title) VALUES(?)";
+    private static final String INSERT = "INSERT INTO category(title) VALUES(?) RETURNING ID";
 
     private JdbcTemplate jdbcTemplate;
     private CategoryRowMapper mapper;
 
     @Override
     public CategoryEntity save(CategoryEntity entity) {
-        return jdbcTemplate.queryForObject(INSERT, mapper, entity.getTitle());
+        entity.setId(jdbcTemplate.queryForObject(INSERT, Long.class, entity.getTitle()));
+        return entity;
     }
 
     @Override
