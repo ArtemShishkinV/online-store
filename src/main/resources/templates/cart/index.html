@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Корзина</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/cart.css}">
+</head>
+<body>
+<div th:replace="header :: copy-header"></div>
+<main>
+    <div class="container">
+        <div class="cart-inner">
+            <table class="table">
+                <tr>
+                    <th>Изображение</th>
+                    <th>Название</th>
+                    <th>Описание</th>
+                    <th>Цена</th>
+                </tr>
+                <tr th:each="product: ${products}">
+                    <td>
+                        <img th:src="@{${product.imagePath}}"
+                             alt="Изображение продукта"/>
+                    </td>
+                    <td th:text="${product.title}"> text </td>
+                    <td th:text="${product.description}"> desc </td>
+                    <td th:text="${product.price}"> price </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</main>
+<script type="text/javascript" src="../../static/scripts/cart/script.js"></script>
+</body>
+</html>

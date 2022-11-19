@@ -14,7 +14,9 @@
     <div class="container">
         <div class="products-inner">
             <div class="products">
-                <div th:each="product: ${products}" class="products-product">
+                <form th:each="product: ${products}" class="products-product" th:method="POST" th:action="@{/cart/add}"
+                      th:object="${product}">
+                    <input type="hidden" th:value="${product.id}" th:attr="name='id'">
                     <a th:href="@{/products/{id}(id=${product.getId()})}" class="products-product-image-block">
                         <img th:src="@{${product.imagePath}}"
                              alt="Изображение продукта"
@@ -25,19 +27,10 @@
                     <div class="products-product-price" th:text="${product.price}">
                         price
                     </div>
-                </div>
-                <div th:each="product: ${products}" class="products-product">
-                    <a th:href="@{/products/{id}(id=${product.getId()})}" class="products-product-image-block">
-                        <img th:src="@{${product.imagePath}}"
-                             alt="Изображение продукта"
-                             class="products-product-image"/>
-                    </a>
-                    <a th:href="@{/products/{id}(id=${product.getId()})}"
-                       th:text="${product.title}">value</a>
-                    <div class="products-product-price" th:text="${product.price}">
-                        price
+                    <div class="products-add-to-cart">
+                        <input type="submit" value="Купить!"/>
                     </div>
-                </div>
+                </form>
             </div>
             <br/>
             <hr/>
