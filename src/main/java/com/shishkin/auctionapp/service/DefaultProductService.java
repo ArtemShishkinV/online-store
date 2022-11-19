@@ -29,7 +29,6 @@ public class DefaultProductService implements ProductService {
 
     @Override
     public Product findById(Long id) {
-        //TODO: get categoryTitle in product model
         return productMapper.productEntityToProduct(productRepository.findById(id)
                 .orElseThrow(() -> new ProductNotFoundException(HttpStatus.NOT_FOUND, "Product not found: id = " + id)));
     }

@@ -1,7 +1,5 @@
 package com.shishkin.auctionapp.service;
 
-import com.shishkin.auctionapp.entity.ProductEntity;
-import com.shishkin.auctionapp.model.Product;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
