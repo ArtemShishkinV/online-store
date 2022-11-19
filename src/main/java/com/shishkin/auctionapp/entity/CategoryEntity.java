@@ -3,22 +3,18 @@ package com.shishkin.auctionapp.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.UUID;
 
 
-@Entity
-@Table(name = "category")
+@Table("category")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class CategoryEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @PrimaryKey
+    private Long id = UUID.randomUUID().getMostSignificantBits();
     private String title;
 }

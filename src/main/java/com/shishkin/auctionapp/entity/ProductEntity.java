@@ -1,30 +1,31 @@
 package com.shishkin.auctionapp.entity;
 
+import com.shishkin.auctionapp.entity.udt.CategoryUdt;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.cassandra.core.mapping.Column;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.Date;
+import java.util.UUID;
 
 
-@Entity
-@Table(name = "product")
+@Table("product")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @PrimaryKey
+    private Long id = UUID.randomUUID().getMostSignificantBits();
     private String title;
     private String image;
     private String description;
     private Long price;
-    private Long categoryId;
+
+    @Column("category")
+    private CategoryUdt category;
 
     public String getImagePath() {
         if (image == null || id == null) return null;

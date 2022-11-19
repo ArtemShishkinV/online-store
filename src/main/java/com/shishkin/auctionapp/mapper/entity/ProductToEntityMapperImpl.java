@@ -1,6 +1,7 @@
 package com.shishkin.auctionapp.mapper.entity;
 
 import com.shishkin.auctionapp.entity.ProductEntity;
+import com.shishkin.auctionapp.entity.udt.CategoryUdt;
 import com.shishkin.auctionapp.model.Product;
 import com.shishkin.auctionapp.service.CategoryService;
 import lombok.AllArgsConstructor;
@@ -19,13 +20,12 @@ public class ProductToEntityMapperImpl implements ProductToEntityMapper {
 
         ProductEntity productEntity = new ProductEntity();
 
-        productEntity.setId(product.getId());
         productEntity.setTitle(product.getTitle());
         productEntity.setDescription(product.getDescription());
         productEntity.setPrice(product.getPrice());
 
         productEntity.setImage(product.getImage().getOriginalFilename());
-        productEntity.setCategoryId(categoryService.findByTitle(product.getCategoryTitle()).getId());
+        productEntity.setCategory(new CategoryUdt(product.getCategoryTitle()));
         return productEntity;
     }
 
@@ -43,7 +43,7 @@ public class ProductToEntityMapperImpl implements ProductToEntityMapper {
         product.setPrice(productEntity.getPrice());
 
         product.setImagePath(productEntity.getImagePath());
-        product.setCategoryTitle(categoryService.findById(productEntity.getCategoryId()).getTitle());
+        product.setCategoryTitle(product.getCategoryTitle());
 
         return product;
     }

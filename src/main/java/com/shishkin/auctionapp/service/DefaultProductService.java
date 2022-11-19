@@ -1,6 +1,7 @@
 package com.shishkin.auctionapp.service;
 
 import com.shishkin.auctionapp.entity.ProductEntity;
+import com.shishkin.auctionapp.entity.udt.CategoryUdt;
 import com.shishkin.auctionapp.exception.CategoryNotFoundException;
 import com.shishkin.auctionapp.exception.ProductNotFoundException;
 import com.shishkin.auctionapp.mapper.entity.ProductToEntityMapper;
@@ -36,9 +37,7 @@ public class DefaultProductService implements ProductService {
     @Override
     public ProductEntity add(Product product) {
         ProductEntity productEntity = this.productMapper.productToProductEntity(product);
-        productEntity.setCategoryId(categoryRepository.findByTitle(product.getCategoryTitle())
-                .orElseThrow(() -> new CategoryNotFoundException(HttpStatus.NOT_FOUND,
-                        "Category not found: title = " + product.getCategoryTitle())).getId());
+        productEntity.setCategory(new CategoryUdt(product.getCategoryTitle()));
 
         return productRepository.save(productEntity);
     }

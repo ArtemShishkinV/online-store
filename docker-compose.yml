@@ -1,0 +1,11 @@
+version: '3.9'
+services:
+  shop-cassandra:
+    image: cassandra
+    container_name: shop-cassandra
+    ports:
+      - "9042:9042"
+networks:
+  default:
+    name: cassandra-net
+    external: true
