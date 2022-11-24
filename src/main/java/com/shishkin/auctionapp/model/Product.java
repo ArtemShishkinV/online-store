@@ -1,10 +1,8 @@
 package com.shishkin.auctionapp.model;
 
-import com.shishkin.auctionapp.validator.ValidImage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -26,11 +24,6 @@ public class Product {
     private String categoryTitle;
 
     private String description;
-
-    @ValidImage
-    private MultipartFile image;
-
-    private String imagePath;
 
     @NotNull(message = "Цена не может быть пустой!")
     @Min(value = 0, message = "Цена должна быть больше 0!")

@@ -23,9 +23,8 @@ public class ProductToEntityMapperImpl implements ProductToEntityMapper {
         productEntity.setTitle(product.getTitle());
         productEntity.setDescription(product.getDescription());
         productEntity.setPrice(product.getPrice());
-
-        productEntity.setImage(product.getImage().getOriginalFilename());
         productEntity.setCategoryId(categoryService.findByTitle(product.getCategoryTitle()).getId());
+
         return productEntity;
     }
 
@@ -41,8 +40,6 @@ public class ProductToEntityMapperImpl implements ProductToEntityMapper {
         product.setTitle(productEntity.getTitle());
         product.setDescription(productEntity.getDescription());
         product.setPrice(productEntity.getPrice());
-
-        product.setImagePath(productEntity.getImagePath());
         product.setCategoryTitle(categoryService.findById(productEntity.getCategoryId()).getTitle());
 
         return product;

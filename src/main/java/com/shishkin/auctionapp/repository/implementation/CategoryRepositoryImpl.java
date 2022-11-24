@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -39,6 +40,11 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     @Override
     public Optional<CategoryEntity> findById(Long id) {
         return Optional.ofNullable(jdbcTemplate.queryForObject(FIND_BY_ID, mapper, id));
+    }
+
+    @Override
+    public Iterable<CategoryEntity> saveAll(List<CategoryEntity> list) {
+        return null;
     }
 
 

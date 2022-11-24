@@ -14,34 +14,29 @@
     <div class="container">
         <div class="products-inner">
             <div class="products">
-                <div th:each="product: ${products}" class="products-product">
-                    <a th:href="@{/products/{id}(id=${product.getId()})}" class="products-product-image-block">
-                        <img th:src="@{${product.imagePath}}"
-                             alt="Изображение продукта"
-                             class="products-product-image"/>
-                    </a>
-                    <a th:href="@{/products/{id}(id=${product.getId()})}"
-                       th:text="${product.title}">value</a>
-                    <div class="products-product-price" th:text="${product.price}">
-                        price
-                    </div>
-                </div>
-                <div th:each="product: ${products}" class="products-product">
-                    <a th:href="@{/products/{id}(id=${product.getId()})}" class="products-product-image-block">
-                        <img th:src="@{${product.imagePath}}"
-                             alt="Изображение продукта"
-                             class="products-product-image"/>
-                    </a>
-                    <a th:href="@{/products/{id}(id=${product.getId()})}"
-                       th:text="${product.title}">value</a>
-                    <div class="products-product-price" th:text="${product.price}">
-                        price
-                    </div>
-                </div>
+                <table>
+                    <tr>
+                        <th>Наименование</th>
+                        <th>Категория</th>
+                        <th>Описание</th>
+                        <th>Цена</th>
+                    </tr>
+                    <tr th:each="product: ${products}">
+                        <td><a th:href="@{/products/{id}(id=${product.getId()})}"
+                               th:text="${product.title}">value</a></td>
+                        <td th:text="${product.categoryTitle}">category</td>
+                        <td th:text="${product.description}">description</td>
+                        <td th:text="${product.price}">price</td>
+                    </tr>
+                </table>
             </div>
             <br/>
             <hr/>
             <a href="/products/create">Создать продукт!</a>
+            <form th:method="POST" th:action="@{/products/create/many}"
+                  enctype="multipart/form-data">
+                <button type="submit"> Сгенерировать 10 продуктов! </button>
+            </form>
         </div>
     </div>
 </main>

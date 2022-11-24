@@ -40,13 +40,6 @@
             </div>
 
             <div>
-                <input type="file" id="image" th:field="*{image}"
-                       required="required" placeholder="Загрузить изображение" accept="image/png, image/jpeg"/>
-                <div style="color:red" th:if="${#fields.hasErrors('image')}" th:errors="*{image}">price error</div>
-                <br/>
-            </div>
-
-            <div>
                 <select th:field="*{categoryTitle}" th:onchange="disableDefaultCategory()" required="required">
                     <option value="" id="default-category" th:selected="selected">Выберите категорию</option>
                     <option th:each="category: ${categories}"

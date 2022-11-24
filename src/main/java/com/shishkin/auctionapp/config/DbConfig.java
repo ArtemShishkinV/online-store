@@ -14,7 +14,7 @@ public class DbConfig {
     public DataSource dataSource() {
         DataSourceBuilder<HikariDataSource> dataSourceBuilder = DataSourceBuilder.create().type(HikariDataSource.class);
         dataSourceBuilder.driverClassName("org.postgresql.Driver");
-        dataSourceBuilder.url("jdbc:postgresql://localhost:5432/AuctionDB");
+        dataSourceBuilder.url("jdbc:postgresql://localhost:5432/shopDB");
         dataSourceBuilder.username("postgres");
         dataSourceBuilder.password("12345");
         return dataSourceBuilder.build();

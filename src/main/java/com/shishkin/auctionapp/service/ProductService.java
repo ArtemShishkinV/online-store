@@ -12,4 +12,6 @@ public interface ProductService {
     Product findById(Long id) throws ProductNotFoundException;
 
     ProductEntity add(Product product);
+
+    List<ProductEntity> saveAll(List<ProductEntity> products);
 }
