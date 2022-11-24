@@ -29,7 +29,6 @@ public class ProductController {
 
     @GetMapping()
     public String showAll(Model model) {
-        //TODO: create template and implement this method
         model.addAttribute("products", productService.findAll());
         return "product/index";
     }

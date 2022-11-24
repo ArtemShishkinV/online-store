@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Auction</title>
@@ -21,13 +20,6 @@
                     <li><a href="/categories">Категории</a></li>
                 </ul>
             </nav>
-            <div sec:authorize="!(isAuthenticated())" class="hello-header-authorization">
-                <a href="/login">Войти</a>
-                <a href="/register">Зарегистрироваться</a>
-            </div>
-            <div sec:authorize="isAuthenticated()" class="hello-header-authorization">
-                <a href="/logout">Выйти</a>
-            </div>
         </div>
     </div>
 </header>

@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -16,6 +17,11 @@ public class ProductRepositoryImpl implements ProductRepository {
     private static final String FIND_BY_ID = "SELECT * FROM product WHERE product.id = (?)";
     private static final String INSERT = "INSERT INTO product(description, image, price, title, category_id) " +
             "VALUES (?, ?, ?, ?, ?) RETURNING ID";
+
+    @Override
+    public Iterable<ProductEntity> saveAll(List<ProductEntity> list) {
+        return null;
+    }
 
     private JdbcTemplate jdbcTemplate;
     private ProductRowMapper mapper;
