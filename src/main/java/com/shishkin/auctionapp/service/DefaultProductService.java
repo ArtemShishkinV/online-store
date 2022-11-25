@@ -5,6 +5,7 @@ import com.shishkin.auctionapp.entity.ProductEntity;
 import com.shishkin.auctionapp.exception.CategoryNotFoundException;
 import com.shishkin.auctionapp.exception.ProductNotFoundException;
 import com.shishkin.auctionapp.mapper.entity.ProductToEntityMapper;
+import com.shishkin.auctionapp.model.Category;
 import com.shishkin.auctionapp.model.Product;
 import com.shishkin.auctionapp.repository.CategoryRepository;
 import com.shishkin.auctionapp.repository.ProductRepository;
@@ -51,6 +52,12 @@ public class DefaultProductService implements ProductService {
     @Override
     public List<ProductEntity> saveAll(List<ProductEntity> products) {
         return StreamSupport.stream(productRepository.saveAll(products).spliterator(), false).toList();
+    }
+
+    @Override
+    public List<Product> findByCategory(Category category) {
+        return StreamSupport.stream(productRepository.findByCategory(category.getId()).spliterator(), false)
+                .map(productMapper::productEntityToProduct).toList();
     }
 
     public List<ProductEntity> generate(int count) {

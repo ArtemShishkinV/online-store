@@ -19,6 +19,8 @@ public class ProductRepositoryImpl implements ProductRepository {
     private static final String INSERT = "INSERT INTO product(title, description, price, category_id) " +
             "VALUES (?, ?, ?, ?) RETURNING ID";
 
+    private static final String FIND_BY_CATEGORY_ID = "SELECT * FROM product WHERE product.category_id = (?)";
+
     private JdbcTemplate jdbcTemplate;
     private ProductRowMapper mapper;
 
@@ -47,10 +49,17 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Override
     public ProductEntity save(ProductEntity entity) {
         entity.setId(jdbcTemplate.queryForObject(INSERT, Long.class,
+                entity.getTitle(),
                 entity.getDescription(),
                 entity.getPrice(),
-                entity.getTitle(),
                 entity.getCategoryId()));
         return entity;
+    }
+
+    @Override
+    public Iterable<ProductEntity> findByCategory(Long categoryId) {
+        List<ProductEntity> productEntities = jdbcTemplate.query(FIND_BY_CATEGORY_ID, mapper, categoryId);
+        System.out.println(productEntities);
+        return productEntities;
     }
 }

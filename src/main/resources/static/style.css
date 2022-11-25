@@ -27,8 +27,24 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
+.create-product-form {
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    width: 100%;
+    align-items: center;
+}
+
 .create-product-form div {
-    margin: 10px;
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.create-product-form button {
+    width: 150px;
+    font-size: 15px;
 }
 
 

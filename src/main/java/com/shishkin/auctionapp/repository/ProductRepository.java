@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProductRepository extends EntityRepository<ProductEntity, Long> {
+    Iterable<ProductEntity> findByCategory(Long categoryId);
 }

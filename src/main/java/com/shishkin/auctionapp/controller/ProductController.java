@@ -1,9 +1,9 @@
 package com.shishkin.auctionapp.controller;
 
+import com.shishkin.auctionapp.model.Category;
 import com.shishkin.auctionapp.model.Product;
 import com.shishkin.auctionapp.service.CategoryService;
 import com.shishkin.auctionapp.service.DefaultProductService;
-import com.shishkin.auctionapp.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,18 +15,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-import java.io.IOException;
 
 @Controller
 @AllArgsConstructor
 @RequestMapping("/products")
 public class ProductController {
+    private static final String REDIRECT_INDEX = "redirect:/products";
     private DefaultProductService productService;
     private CategoryService categoryService;
 
     @GetMapping()
     public String showAll(Model model) {
         model.addAttribute("products", productService.findAll());
+        return "product/index";
+    }
+
+    @GetMapping("/category/{title}")
+    public String showProductsByCategoryTitle(@PathVariable(required = true) String title, Model model) {
+        Category category = categoryService.findByTitle(title);
+        model.addAttribute("products", productService.findByCategory(category));
         return "product/index";
     }
 
@@ -53,15 +60,16 @@ public class ProductController {
             model.addAttribute("categories", categoryService.findAll());
             return "product/create";
         }
+        System.out.println(product);
         productService.add(product);
 
-        return "redirect:/products";
+        return REDIRECT_INDEX;
     }
 
     @PostMapping("/create/many")
     public String generate() {
         this.productService.saveAll(this.productService.generate(10));
-        return "redirect:/products";
+        return REDIRECT_INDEX;
     }
 
 }
