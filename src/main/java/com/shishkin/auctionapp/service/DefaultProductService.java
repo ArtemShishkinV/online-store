@@ -41,6 +41,11 @@ public class DefaultProductService implements ProductService {
     }
 
     @Override
+    public void deleteById(Long id) {
+        this.productRepository.deleteById(id);
+    }
+
+    @Override
     public ProductEntity add(Product product) throws CategoryNotFoundException {
         ProductEntity productEntity = this.productMapper.productToProductEntity(product);
         try {

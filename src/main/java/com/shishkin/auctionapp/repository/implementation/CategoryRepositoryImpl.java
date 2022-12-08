@@ -21,6 +21,12 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     private static final String INSERT = "INSERT INTO category(title) VALUES(?) RETURNING ID";
 
     private JdbcTemplate jdbcTemplate;
+
+    @Override
+    public void deleteById(Long id) {
+
+    }
+
     private CategoryRowMapper mapper;
 
     @Override

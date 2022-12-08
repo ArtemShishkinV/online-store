@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -72,6 +73,12 @@ public class ProductController {
     @PostMapping("/create/many")
     public String generate() {
         this.productService.saveAll(this.productService.generate(10));
+        return REDIRECT_INDEX;
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable(required = false) Long id) {
+        this.productService.deleteById(id);
         return REDIRECT_INDEX;
     }
 

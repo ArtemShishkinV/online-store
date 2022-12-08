@@ -5,10 +5,15 @@ import com.shishkin.auctionapp.mapper.row.ProductRowMapper;
 import com.shishkin.auctionapp.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 @Repository
@@ -20,6 +25,7 @@ public class ProductRepositoryImpl implements ProductRepository {
             "VALUES (?, ?, ?, ?) RETURNING ID";
 
     private static final String FIND_BY_CATEGORY_ID = "SELECT * FROM product WHERE product.category_id = (?)";
+    public static final String DELETE_BY_ID = "delete_product";
 
     private JdbcTemplate jdbcTemplate;
     private ProductRowMapper mapper;
@@ -61,5 +67,13 @@ public class ProductRepositoryImpl implements ProductRepository {
         List<ProductEntity> productEntities = jdbcTemplate.query(FIND_BY_CATEGORY_ID, mapper, categoryId);
         System.out.println(productEntities);
         return productEntities;
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        SimpleJdbcCall jdbcCall = new SimpleJdbcCall(Objects.requireNonNull(jdbcTemplate.getDataSource()))
+                .withFunctionName(DELETE_BY_ID);
+        SqlParameterSource in = new MapSqlParameterSource().addValue("prod_id", id);
+        jdbcCall.execute(in);
     }
 }

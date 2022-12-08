@@ -11,4 +11,6 @@ public interface EntityRepository<T, ID> {
     Iterable<T> saveAll(List<T> list);
 
     T save(T entity);
+
+    void deleteById(ID id);
 }
