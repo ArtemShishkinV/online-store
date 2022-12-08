@@ -4,9 +4,11 @@ import com.shishkin.auctionapp.entity.CategoryEntity;
 import com.shishkin.auctionapp.mapper.row.CategoryRowMapper;
 import com.shishkin.auctionapp.repository.CategoryRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,8 +30,14 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     }
 
     @Override
-    public Optional<CategoryEntity> findByTitle(String title) {
-        return Optional.ofNullable(jdbcTemplate.queryForObject(FIND_BY_TITLE, mapper, title));
+    public Optional<CategoryEntity> findByTitle(String title) throws SQLException {
+        CategoryEntity category;
+        try {
+            category = jdbcTemplate.queryForObject(FIND_BY_TITLE, mapper, title);
+        } catch (EmptyResultDataAccessException e) {
+            throw new SQLException(e);
+        }
+        return Optional.ofNullable(category);
     }
 
     @Override

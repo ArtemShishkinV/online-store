@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -40,11 +41,15 @@ public class DefaultProductService implements ProductService {
     }
 
     @Override
-    public ProductEntity add(Product product) {
+    public ProductEntity add(Product product) throws CategoryNotFoundException {
         ProductEntity productEntity = this.productMapper.productToProductEntity(product);
-        productEntity.setCategoryId(categoryRepository.findByTitle(product.getCategoryTitle())
-                .orElseThrow(() -> new CategoryNotFoundException(HttpStatus.NOT_FOUND,
-                        "Category not found: title = " + product.getCategoryTitle())).getId());
+        try {
+            productEntity.setCategoryId(categoryRepository.findByTitle(product.getCategoryTitle())
+                    .orElseThrow().getId());
+        } catch (SQLException e) {
+            throw new CategoryNotFoundException(HttpStatus.NOT_FOUND,
+                    "Category not found: title = " + product.getCategoryTitle(), e);
+        }
 
         return productRepository.save(productEntity);
     }

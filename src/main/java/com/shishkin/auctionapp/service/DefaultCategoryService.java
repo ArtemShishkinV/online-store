@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.StreamSupport;
 
@@ -31,8 +32,11 @@ public class DefaultCategoryService implements CategoryService {
 
     @Override
     public Category findByTitle(String title) throws CategoryNotFoundException {
-        return mapper.categoryEntityToCategory(categoryRepository.findByTitle(title)
-                .orElseThrow(() -> new CategoryNotFoundException(HttpStatus.NOT_FOUND, "Category not found: title = " + title)));
+        try {
+            return mapper.categoryEntityToCategory(categoryRepository.findByTitle(title).orElseThrow());
+        } catch (SQLException e) {
+            throw new CategoryNotFoundException(HttpStatus.NOT_FOUND, "Category not found: title = " + title, e);
+        }
     }
 
     @Override

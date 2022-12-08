@@ -7,12 +7,14 @@ import com.shishkin.auctionapp.service.DefaultProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
@@ -30,8 +32,9 @@ public class ProductController {
         return "product/index";
     }
 
-    @GetMapping("/category/{title}")
-    public String showProductsByCategoryTitle(@PathVariable(required = true) String title, Model model) {
+    @GetMapping("/category")
+    public String showProductsByCategoryTitle(@RequestParam("title") String title, Model model) {
+        title = StringUtils.capitalize(title);
         Category category = categoryService.findByTitle(title);
         model.addAttribute("products", productService.findByCategory(category));
         return "product/index";

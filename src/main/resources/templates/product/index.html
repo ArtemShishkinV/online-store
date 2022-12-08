@@ -13,6 +13,11 @@
 <main>
     <div class="container">
         <div class="products-inner">
+            <form th:method="GET" th:action="@{/products/category}"
+                  enctype="multipart/form-data" class="products-category-find">
+                <input type="text" th:name="title" placeholder="Название категории">
+                <button type="submit"> Найти категорию!</button>
+            </form>
             <div class="products">
                 <table>
                     <tr>
@@ -35,7 +40,7 @@
             <a href="/products/create">Создать продукт!</a>
             <form th:method="POST" th:action="@{/products/create/many}"
                   enctype="multipart/form-data">
-                <button type="submit"> Сгенерировать 10 продуктов! </button>
+                <button type="submit"> Сгенерировать 10 продуктов!</button>
             </form>
         </div>
     </div>

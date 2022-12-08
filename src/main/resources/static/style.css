@@ -214,3 +214,17 @@ table th {
     color: white;
 }
 
+.products-category-find {
+    display: flex;
+    align-items: center;
+    max-width: 400px;
+    width: 100%;
+    margin-top: 20px;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.products-category-find button {
+    margin-top: 10px;
+    margin-bottom: 0;
+}
