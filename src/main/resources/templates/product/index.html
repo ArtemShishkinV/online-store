@@ -13,6 +13,11 @@
 <main>
     <div class="container">
         <div class="products-inner">
+            <form th:method="GET" th:action="@{/products/category}"
+                  enctype="multipart/form-data" class="products-category-find">
+                <input type="text" th:name="title" placeholder="Название категории">
+                <button type="submit"> Найти категорию!</button>
+            </form>
             <div class="products">
                 <form th:each="product: ${products}" class="products-product" th:method="POST" th:action="@{/cart/add}"
                       th:object="${product}">
