@@ -4,6 +4,7 @@ import com.shishkin.auctionapp.entity.ProductEntity;
 import com.shishkin.auctionapp.mapper.row.ProductRowMapper;
 import com.shishkin.auctionapp.repository.ProductRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -25,7 +26,8 @@ public class ProductRepositoryImpl implements ProductRepository {
             "VALUES (?, ?, ?, ?) RETURNING ID";
 
     private static final String FIND_BY_CATEGORY_ID = "SELECT * FROM product WHERE product.category_id = (?)";
-    public static final String DELETE_BY_ID = "delete_product";
+    public static final String FUNC_DELETE_BY_ID = "delete_product";
+    public static final String FUNC_FIND_PRODUCTS_BY_CATEGORY_ID = "SELECT * from find_products_by_category_id(?)";
 
     private JdbcTemplate jdbcTemplate;
     private ProductRowMapper mapper;
@@ -34,10 +36,10 @@ public class ProductRepositoryImpl implements ProductRepository {
     public Iterable<ProductEntity> saveAll(List<ProductEntity> products) {
         jdbcTemplate.batchUpdate(INSERT, products, 50,
                 (PreparedStatement ps, ProductEntity entity) -> {
-                ps.setString(1, entity.getTitle());
-                ps.setString(2, entity.getDescription());
-                ps.setLong(3, entity.getPrice());
-                ps.setLong(4, entity.getCategoryId());
+                    ps.setString(1, entity.getTitle());
+                    ps.setString(2, entity.getDescription());
+                    ps.setLong(3, entity.getPrice());
+                    ps.setLong(4, entity.getCategoryId());
                 });
         return products;
     }
@@ -64,15 +66,20 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public Iterable<ProductEntity> findByCategory(Long categoryId) {
-        List<ProductEntity> productEntities = jdbcTemplate.query(FIND_BY_CATEGORY_ID, mapper, categoryId);
-        System.out.println(productEntities);
-        return productEntities;
+//        SimpleJdbcCall jdbcCall = new SimpleJdbcCall(jdbcTemplate).withFunctionName(FUNC_FIND_PRODUCTS_BY_CATEGORY_ID);
+//        SqlParameterSource in = new MapSqlParameterSource().addValue("_id", categoryId);
+//
+//        Map<String, Object> out = jdbcCall.execute(in);
+//
+//        return (List<ProductEntity>) out.get("");
+
+        return jdbcTemplate.query(FUNC_FIND_PRODUCTS_BY_CATEGORY_ID, mapper, categoryId.intValue());
     }
 
     @Override
     public void deleteById(Long id) {
         SimpleJdbcCall jdbcCall = new SimpleJdbcCall(Objects.requireNonNull(jdbcTemplate.getDataSource()))
-                .withFunctionName(DELETE_BY_ID);
+                .withFunctionName(FUNC_DELETE_BY_ID);
         SqlParameterSource in = new MapSqlParameterSource().addValue("prod_id", id);
         jdbcCall.execute(in);
     }
