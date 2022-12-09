@@ -1,5 +1,6 @@
 package com.shishkin.auctionapp.service;
 
+import com.shishkin.auctionapp.exception.CategoryAlreadyExistException;
 import com.shishkin.auctionapp.exception.CategoryNotFoundException;
 import com.shishkin.auctionapp.model.Category;
 
@@ -12,5 +13,5 @@ public interface CategoryService {
 
     Category findByTitle(String title) throws CategoryNotFoundException;
 
-    void add(Category category);
+    void add(Category category) throws CategoryAlreadyExistException;
 }

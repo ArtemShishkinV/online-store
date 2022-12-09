@@ -198,9 +198,14 @@ header a:hover {
 .products-category-find button {
     margin-top: 10px;
     margin-bottom: 0;
+    padding: 5px 10px;
 }
 
 .products button {
     margin-bottom: 0;
+}
+
+::placeholder {
+    text-align: center;
 }
 

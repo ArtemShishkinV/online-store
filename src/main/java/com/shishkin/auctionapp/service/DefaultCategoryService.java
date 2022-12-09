@@ -1,13 +1,17 @@
 package com.shishkin.auctionapp.service;
 
+import com.shishkin.auctionapp.exception.CategoryAlreadyExistException;
 import com.shishkin.auctionapp.exception.CategoryNotFoundException;
 import com.shishkin.auctionapp.mapper.entity.CategoryToEntityMapper;
 import com.shishkin.auctionapp.model.Category;
 import com.shishkin.auctionapp.repository.CategoryRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import javax.validation.ConstraintViolationException;
+import javax.validation.ValidationException;
 import java.util.List;
 import java.util.stream.StreamSupport;
 
@@ -36,7 +40,12 @@ public class DefaultCategoryService implements CategoryService {
     }
 
     @Override
-    public void add(Category category) {
-        categoryRepository.save(mapper.categoryToCategoryEntity(category));
+    public void add(Category category) throws CategoryAlreadyExistException {
+        try {
+            categoryRepository.save(mapper.categoryToCategoryEntity(category));
+        } catch (RuntimeException e) {
+            throw new CategoryAlreadyExistException(HttpStatus.BAD_REQUEST,
+                    String.format("category with title {%s} already exist", category.getTitle()), e);
+        }
     }
 }
