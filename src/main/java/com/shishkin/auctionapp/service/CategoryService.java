@@ -14,4 +14,6 @@ public interface CategoryService {
     Category findByTitle(String title) throws CategoryNotFoundException;
 
     void add(Category category) throws CategoryAlreadyExistException;
+
+    Category update(Category category);
 }

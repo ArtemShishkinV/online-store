@@ -1,5 +1,6 @@
 package com.shishkin.auctionapp.service;
 
+import com.shishkin.auctionapp.entity.CategoryEntity;
 import com.shishkin.auctionapp.exception.CategoryAlreadyExistException;
 import com.shishkin.auctionapp.exception.CategoryNotFoundException;
 import com.shishkin.auctionapp.mapper.entity.CategoryToEntityMapper;
@@ -18,6 +19,8 @@ import java.util.stream.StreamSupport;
 @Service
 @AllArgsConstructor
 public class DefaultCategoryService implements CategoryService {
+
+
     private final CategoryRepository categoryRepository;
     private final CategoryToEntityMapper mapper;
 
@@ -47,5 +50,14 @@ public class DefaultCategoryService implements CategoryService {
             throw new CategoryAlreadyExistException(HttpStatus.BAD_REQUEST,
                     String.format("category with title {%s} already exist", category.getTitle()), e);
         }
+    }
+
+    @Override
+    public Category update(Category category) {
+        Category srcCategory = this.findById(category.getId());
+        if (category.getTitle() != null) {
+            srcCategory.setTitle(category.getTitle());
+        }
+        return mapper.categoryEntityToCategory(categoryRepository.save(mapper.categoryToCategoryEntity(srcCategory)));
     }
 }

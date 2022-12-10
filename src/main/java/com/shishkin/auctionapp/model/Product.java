@@ -1,5 +1,6 @@
 package com.shishkin.auctionapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shishkin.auctionapp.validator.ValidImage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,6 +29,7 @@ public class Product {
     private String description;
 
     @ValidImage
+    @JsonIgnore
     private MultipartFile image;
 
     private String imagePath;
