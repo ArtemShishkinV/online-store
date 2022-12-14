@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +26,7 @@ import java.util.List;
 @RequestMapping(path = "api/store", produces = "application/json")
 @CrossOrigin(origins = "https://store:8080")
 @AllArgsConstructor
-public class StoreController {
+public class AdminController {
     private ProductService productService;
 
     private CategoryService categoryService;
@@ -48,7 +49,7 @@ public class StoreController {
     }
 
     @PatchMapping(path = "/category/update/{id}", consumes = "application/json")
-    public ResponseEntity<String> createCategory(@PathVariable Long id,
+    public ResponseEntity<String> updateCategory(@PathVariable Long id,
                                                  @RequestBody Category category) {
         if (id == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "id must not be null");
@@ -58,6 +59,16 @@ public class StoreController {
         }
         categoryService.update(category);
         return ResponseEntity.status(HttpStatus.CREATED).body("OK!");
+    }
+
+    @DeleteMapping(path = "/products/delete/{id}")
+    public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
+        if (id != null) {
+            this.productService.delete(id);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT)
+                    .body(String.format("Product with id {%d} was deleted!", id));
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "invalid data for delete");
     }
 
 

@@ -50,4 +50,9 @@ public class DefaultProductService implements ProductService {
 
         return productRepository.save(productEntity);
     }
+
+    @Override
+    public void delete(Long id) {
+        productRepository.deleteById(id);
+    }
 }

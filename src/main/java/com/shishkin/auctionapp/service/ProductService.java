@@ -14,5 +14,7 @@ public interface ProductService {
 
     ProductEntity add(Product product);
 
+    void delete(Long id);
+
     List<Product> findByCategory(Category category);
 }
