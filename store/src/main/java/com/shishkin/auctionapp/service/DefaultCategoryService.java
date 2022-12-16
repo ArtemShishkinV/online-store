@@ -1,18 +1,14 @@
 package com.shishkin.auctionapp.service;
 
-import com.shishkin.auctionapp.entity.CategoryEntity;
 import com.shishkin.auctionapp.exception.CategoryAlreadyExistException;
 import com.shishkin.auctionapp.exception.CategoryNotFoundException;
 import com.shishkin.auctionapp.mapper.entity.CategoryToEntityMapper;
 import com.shishkin.auctionapp.model.Category;
 import com.shishkin.auctionapp.repository.CategoryRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import javax.validation.ConstraintViolationException;
-import javax.validation.ValidationException;
 import java.util.List;
 import java.util.stream.StreamSupport;
 

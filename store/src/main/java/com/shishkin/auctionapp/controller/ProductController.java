@@ -26,13 +26,14 @@ import java.nio.file.Paths;
 @AllArgsConstructor
 @RequestMapping("/products")
 public class ProductController {
+    public static final String PRODUCTS = "products";
     private ProductService productService;
     private CategoryService categoryService;
     private FileUploadService fileUploadService;
 
     @GetMapping()
     public String showAll(Model model) {
-        model.addAttribute("products", productService.findAll());
+        model.addAttribute(PRODUCTS, productService.findAll());
         return "product/index";
     }
 
@@ -47,7 +48,7 @@ public class ProductController {
     public String showProductsByCategoryTitle(@RequestParam("title") String title, Model model) {
         title = StringUtils.capitalize(title);
         Category category = categoryService.findByTitle(title);
-        model.addAttribute("products", productService.findByCategory(category));
+        model.addAttribute(PRODUCTS, productService.findByCategory(category));
         return "product/index";
     }
 
@@ -69,7 +70,7 @@ public class ProductController {
         }
         ProductEntity productEntity = productService.add(product);
 
-        fileUploadService.uploadFile(Paths.get("products",
+        fileUploadService.uploadFile(Paths.get(PRODUCTS,
                 String.valueOf(productEntity.getId())).toString(), product.getImage());
 
         return "redirect:/products";

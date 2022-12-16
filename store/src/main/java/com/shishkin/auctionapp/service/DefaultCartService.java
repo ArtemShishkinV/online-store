@@ -10,7 +10,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
@@ -26,7 +25,7 @@ public class DefaultCartService implements CartService {
                         cartRepository.findAllByUserId(getAuthentication().getId()).spliterator(),
                         false)
                 .map(item -> productService.findById(item.getProductId()))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
