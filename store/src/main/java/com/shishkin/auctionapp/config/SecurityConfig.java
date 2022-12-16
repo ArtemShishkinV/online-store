@@ -12,6 +12,9 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+    public static final String API_PATH = "/api/store/**";
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -20,9 +23,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http = http.csrf().disable().authorizeRequests()
-                .antMatchers(HttpMethod.DELETE, "/api/store/**").hasAuthority("SCOPE_delete")
-                .antMatchers(HttpMethod.PATCH, "/api/store/**").hasAuthority("SCOPE_change")
-                .antMatchers(HttpMethod.POST, "/api/store/**").hasAuthority("SCOPE_change")
+                .antMatchers(HttpMethod.DELETE, API_PATH).hasAuthority("SCOPE_delete")
+                .antMatchers(HttpMethod.PATCH, API_PATH).hasAuthority("SCOPE_change")
+                .antMatchers(HttpMethod.POST, API_PATH).hasAuthority("SCOPE_change")
                 .antMatchers("/data-api/**").hasAuthority("SCOPE_data-api")
                 .and().oauth2ResourceServer().jwt().and().and();
         return http.authorizeRequests()
